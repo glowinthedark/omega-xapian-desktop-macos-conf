@@ -63,17 +63,33 @@ template_dir /var/lib/omega/templates
 
 ## Building the database index
 
-> Check that `omindex` is in your `$PATH`: `which -a omindex`
-
+First check that `omindex` is in your `$PATH`: `which -a omindex` and then run:
 
 ```bash
 omindex -v \
-  --mime-type=WD3:ignore \
   --mime-type=json:ignore \
-  --mime-type=db:ignore \
+  --mime-type=xml:ignore \
   --mime-type=py:text/plain \
   --ignore-exclusions \
   --db /var/lib/omega/default \
   --url /var/www \
   /Users/myuser/Documents/myfiles
   ```
+  
+  Useful flags that be use to include/exclude file types:
+  
+  ```
+  
+# -M, --mime-type=EXT:TYPE  assume any file with extension EXT has MIME
+#                           Content-Type TYPE, instead of using libmagic
+#                           (empty TYPE removes any existing mapping for EXT;
+#                           other special TYPE values: 'ignore' and 'skip')
+
+# -G, --mime-type-match=GLOB:TYPE
+#                           assume any file with leaf name matching shell
+#                           wildcard pattern GLOB has MIME Content-Type TYPE
+#                           (special TYPE values: 'ignore' and 'skip')
+```
+
+> See all command line flags with `omindex --help`
+
