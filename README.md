@@ -1,6 +1,6 @@
 # MacOS Configuration of omega-xapian for desktop search
 
-### Reference
+## Reference links
 
 - [Omega Quick Start](https://xapian.org/docs/omega/quickstart.html)
 - [Xapian Downloads](https://xapian.org/download)
@@ -93,3 +93,23 @@ omindex -v \
 
 > See all command line flags with `omindex --help`
 
+## Running the server
+
+#### Python dev server
+
+Switch to the directory you configured as web root when you ran `omindex` with `--url /var/www`:
+
+```bash
+cd /var/www
+mkdir -p cgi-bin
+
+# copy the CGI script
+cp /usr/local/Cellar/omega/1.4.18/lib/xapian-omega/bin/omega cgi-bin/
+
+# start the python dev server
+python3 -m http.server --cgi 8000 --directory .
+```
+
+If everything went well then the omega search page should now be accessible at:
+
+- http://localhost:8000/cgi-bin/omega
