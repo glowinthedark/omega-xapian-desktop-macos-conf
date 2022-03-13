@@ -1,0 +1,1 @@
+# omega-xapian-desktop-macos-conf
