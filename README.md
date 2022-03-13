@@ -61,3 +61,19 @@ database_dir /var/lib/omega
 template_dir /var/lib/omega/templates
 ```
 
+## Building the database index
+
+> Check that `omindex` is in your `$PATH`: `which -a omindex`
+
+
+```bash
+omindex -v \
+  --mime-type=WD3:ignore \
+  --mime-type=json:ignore \
+  --mime-type=db:ignore \
+  --mime-type=py:text/plain \
+  --ignore-exclusions \
+  --db /var/lib/omega/default \
+  --url /var/www \
+  /Users/myuser/Documents/myfiles
+  ```
