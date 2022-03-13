@@ -100,13 +100,13 @@ omindex -v \
 Switch to the directory you configured as web root when you ran `omindex` with `--url /var/www`:
 
 ```bash
-cd /var/www
-mkdir -p cgi-bin
+mkdir -p /var/www/cgi-bin
 
-# copy the CGI script
-cp /usr/local/Cellar/omega/1.4.18/lib/xapian-omega/bin/omega cgi-bin/
+# copy the CGI script to the web server's `cgi-bin` folder
+cp /usr/local/Cellar/omega/1.4.18/lib/xapian-omega/bin/omega /var/www/cgi-bin/
 
 # start the python dev server
+cd /var/www
 python3 -m http.server --cgi 8000 --directory .
 ```
 
