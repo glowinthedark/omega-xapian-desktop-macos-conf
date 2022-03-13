@@ -1,5 +1,10 @@
 # MacOS Configuration of omega-xapian for desktop search
 
+### Reference
+
+- [Omega Quick Start](https://xapian.org/docs/omega/quickstart.html)
+- [Xapian Downloads](https://xapian.org/download)
+
 1. Install the omega-xapian binaries:
 
 ```bash
@@ -22,8 +27,6 @@ brew list omega
 #/usr/local/Cellar/omega/1.4.18/share/doc/ (9 files)
 #/usr/local/Cellar/omega/1.4.18/share/man/ (3 files)
 #/usr/local/Cellar/omega/1.4.18/share/omega/ (2 files)
-
-
 ```
 
 Location of the CGI script for web search:
@@ -42,5 +45,19 @@ mkdir -p /var/lib/omega
 cp -r xapian-omega-1.4.19/templates /var/lib/omega/
 ```
 
-- [Omega Quick Start](https://xapian.org/docs/omega/quickstart.html)
-- [Xapian Downloads](https://xapian.org/download)
+3. Edit `omega.conf`
+
+```bash
+vi /usr/local/Cellar/omega/1.4.18/etc/omega.conf
+```
+
+Relevant keys:
+
+```bash
+# Directory containing Xapian databases:
+database_dir /var/lib/omega
+
+# Directory containing OmegaScript templates:
+template_dir /var/lib/omega/templates
+```
+
