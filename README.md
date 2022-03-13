@@ -130,3 +130,37 @@ cd /var/www
 mkdir -p cgi-bin
 fcgiwrap -f -s tcp:127.0.0.1:8999 &
 ```
+3. Create or update the `/etc/caddy/Caddyfile` to include the reverse proxy for `fcgiwrap`:
+
+`sudo vi /etc/caddy/Caddyfile`
+
+```sh
+http:// {
+	@rx_bro {
+		path_regexp rx_bro ^/bro(.*)$
+	}
+
+	root * /var/www
+
+  # optional: enable the file-server browser to enable directory listsings
+	file_server browse {
+		root /Users/vio
+		hide .git
+		index ''
+	}	
+
+	reverse_proxy /cgi-bin/* localhost:8999 {
+		transport fastcgi {
+			split .pl
+		}
+	}
+}
+```
+
+4. Start `caddy`:
+
+```bash
+caddy start --config /etc/caddy/Caddyfile
+```
+
+The search page should now be available at http://localhost/cgi-bin/omega
