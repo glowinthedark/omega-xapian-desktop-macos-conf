@@ -95,7 +95,7 @@ omindex -v \
 
 ## Running the server
 
-#### Python dev server
+### Python dev server
 
 Switch to the directory you configured as web root when you ran `omindex` with `--url /var/www`:
 
@@ -113,3 +113,20 @@ python3 -m http.server --cgi 8000 --directory .
 If everything went well then the omega search page should now be accessible at:
 
 - http://localhost:8000/cgi-bin/omega
+
+
+### Caddy server
+
+1. Intall `fcgiwrap`:
+
+```bash
+brew install fcgiwrap
+```
+
+2. `cd` to the web root folder, create a `cgi-bin` subfolder and launch `fcgiwrap` to run in background:
+
+```
+cd /var/www
+mkdir -p cgi-bin
+fcgiwrap -f -s tcp:127.0.0.1:8999 &
+```
