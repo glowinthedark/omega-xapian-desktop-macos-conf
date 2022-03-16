@@ -150,10 +150,6 @@ fcgiwrap -f -s tcp:127.0.0.1:8999 &
 
 ```sh
 http:// {
-	@rx_bro {
-		path_regexp rx_bro ^/bro(.*)$
-	}
-
 	root * /var/www
 
   # optional: enable the file-server browser module to enable directory listsings
