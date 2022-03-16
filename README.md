@@ -44,28 +44,19 @@ tar xvf xapian-omega-1.4.19.tar.xz
 mkdir -p /var/lib/omega
 cp -r xapian-omega-1.4.19/templates /var/lib/omega/
 
-## after the copy operation your /var/lib/omega/ should look similar to this:
-$ tree /var/lib/omega/
-# /var/lib/omega/
-# ├── default
-# │   ├── docdata.glass
-# │   ├── flintlock
-# │   ├── iamglass
-# │   ├── position.glass
-# │   ├── postlist.glass
-# │   └── termlist.glass
-# ├── templates
-# │   ├── cgi-bin -> /var/lib/omega/templates
-# │   ├── godmode
-# │   ├── inc
-# │   │   ├── anyalldropbox
-# │   │   ├── anyallradio
-# │   │   └── toptermsjs
-# │   ├── opensearch
-# │   ├── query
-# │   ├── topterms
-# │   └── xml
-# └── templatest
+## after the copy operation your /var/lib/omega/templates should look similar to this:
+# $ tree /var/lib/omega/templates
+# /var/lib/omega/templates
+# ├── cgi-bin -> /var/lib/omega/templates
+# ├── godmode
+# ├── inc
+# │   ├── anyalldropbox
+# │   ├── anyallradio
+# │   └── toptermsjs
+# ├── opensearch
+# ├── query
+# ├── topterms
+# └── xml
 ```
 
 3. Edit `omega.conf`
