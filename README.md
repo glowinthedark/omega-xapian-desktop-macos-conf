@@ -111,15 +111,15 @@ omindex -v \
 
 ### Python dev server
 
-Switch to the directory you configured as web root when you ran `omindex` with `--url /var/www`:
+Assuming you used `/var/www` as the web root when you ran `omindex` with e.g. `--url /var/www`:
 
 ```bash
 mkdir -p /var/www/cgi-bin
 
-# copy the CGI script to the web server's `cgi-bin` folder
+# copy the `omega` CGI script to the `cgi-bin` folder under the web root:
 cp /usr/local/Cellar/omega/1.4.18/lib/xapian-omega/bin/omega /var/www/cgi-bin/
 
-# start the python dev server
+# start the python dev server from the web root folder:
 cd /var/www
 python3 -m http.server --cgi 8000 --directory .
 ```
@@ -137,7 +137,7 @@ If everything went well then the omega search page should now be accessible at:
 brew install fcgiwrap
 ```
 
-2. `cd` to the web root folder, create a `cgi-bin` subfolder and launch `fcgiwrap` to run in background:
+2. Assuming `/var/www` is your web root `cd` into it, create a `cgi-bin` subfolder and launch `fcgiwrap` to run in background:
 
 ```
 cd /var/www
@@ -156,11 +156,9 @@ http:// {
 
 	root * /var/www
 
-  # optional: enable the file-server browser to enable directory listsings
+  # optional: enable the file-server browser module to enable directory listsings
 	file_server browse {
-		root /Users/vio
-		hide .git
-		index ''
+		root /var/www
 	}	
 
 	reverse_proxy /cgi-bin/* localhost:8999 {
