@@ -171,4 +171,4 @@ http:// {
 caddy start --config /etc/caddy/Caddyfile
 ```
 
-The search page should now be available at http://localhost/cgi-bin/omega
+The search page should now be available at http://localhost/cgi-bin/omega (or on whatever other port that you have configured `caddy` to use`).
