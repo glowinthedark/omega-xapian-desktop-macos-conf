@@ -43,6 +43,29 @@ wget https://oligarchy.co.uk/xapian/1.4.19/xapian-omega-1.4.19.tar.xz
 tar xvf xapian-omega-1.4.19.tar.xz
 mkdir -p /var/lib/omega
 cp -r xapian-omega-1.4.19/templates /var/lib/omega/
+
+## after the copy operation your /var/lib/omega/ should look similar to this:
+$ tree /var/lib/omega/
+# /var/lib/omega/
+# ├── default
+# │   ├── docdata.glass
+# │   ├── flintlock
+# │   ├── iamglass
+# │   ├── position.glass
+# │   ├── postlist.glass
+# │   └── termlist.glass
+# ├── templates
+# │   ├── cgi-bin -> /var/lib/omega/templates
+# │   ├── godmode
+# │   ├── inc
+# │   │   ├── anyalldropbox
+# │   │   ├── anyallradio
+# │   │   └── toptermsjs
+# │   ├── opensearch
+# │   ├── query
+# │   ├── topterms
+# │   └── xml
+# └── templatest
 ```
 
 3. Edit `omega.conf`
