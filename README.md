@@ -1,4 +1,4 @@
-# MacOS Configuration of omega-xapian for desktop search
+# MacOS Configuration of omega-xapian search
 
 ## Reference links
 
