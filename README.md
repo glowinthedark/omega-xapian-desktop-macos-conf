@@ -90,7 +90,7 @@ omindex -v \
   /Users/myuser/Documents/myfiles
   ```
   
-  Useful flags that be use to include/exclude file types:
+  Useful flags that could be useful in order to configure and include/exclude file types:
   
   ```
   
