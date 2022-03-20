@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Hint</key>
+  <string>IMPORTANT: place this file in user's ~/Library/LaunchAgents folder. For details see "man launchd.plist" and "man launchd"</string> 
+	<key>EnvironmentVariables</key>
+	<dict>
+		<key>PATH</key>
+		<string>/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/usr/local/sbin</string>
+	</dict>
+	<key>Label</key>
+	<string>fcgiwrapper_launcher</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/usr/local/sbin/fcgiwrap</string>
+		<string>-f</string>
+		<string>-s</string>
+		<string>tcp:127.0.0.1:8999</string>
+	</array>
+	<key>RunAtLoad</key>
+	<true/>
+	<key>SessionCreate</key>
+	<false/>
+	<key>EnableGlobbing</key>
+	<true/>
+	<key>WorkingDirectory</key>
+	<string>~</string>
+	<key>StandardErrorPath</key>
+	<string>~/fcgiwrap.log</string>
+	<key>StandardOutPath</key>
+	<string>~/fcgiwrap.log</string>
+</dict>
+</plist>
