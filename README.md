@@ -41,7 +41,8 @@ Location of the CGI script for web search:
 cd /tmp
 wget https://oligarchy.co.uk/xapian/1.4.19/xapian-omega-1.4.19.tar.xz 
 tar xvf xapian-omega-1.4.19.tar.xz
-mkdir -p /var/lib/omega
+sudo mkdir -p /var/lib/omega
+sudo chown `whoami` /var/lib/omega
 cp -r xapian-omega-1.4.19/templates /var/lib/omega/
 
 ## after the copy operation your /var/lib/omega/templates should look similar to this:
