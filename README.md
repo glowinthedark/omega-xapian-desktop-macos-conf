@@ -171,4 +171,15 @@ http:// {
 caddy start --config /etc/caddy/Caddyfile
 ```
 
+To activate and start caddy using the launchd plist file [caddy_launcher.plist](caddy_launcher.plist):
+
+```bash
+launchctl load -w ~/Library/LaunchAgents/caddy.plist
+```
+
+Stop caddy via launchd:
+```bash
+launchctl unload ~/Library/LaunchAgents/caddy.plist
+```
+
 The search page should now be available at http://localhost/cgi-bin/omega (or on whatever other port that you have configured `caddy` to use`).
