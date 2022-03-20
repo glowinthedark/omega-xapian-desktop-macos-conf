@@ -48,7 +48,6 @@ cp -r xapian-omega-1.4.19/templates /var/lib/omega/
 ## after the copy operation your /var/lib/omega/templates should look similar to this:
 # $ tree /var/lib/omega/templates
 # /var/lib/omega/templates
-# ├── cgi-bin -> /var/lib/omega/templates
 # ├── godmode
 # ├── inc
 # │   ├── anyalldropbox
