@@ -195,7 +195,7 @@ You can also run caddy with the the native 3rd party CGI plugin:
 
 
 
-The search page should now be available at http://localhost/cgi-bin/omega (or on whatever other port that you have configured `caddy` to use`).
+The search page should now be available at http://localhost/cgi-bin/omega (or on whatever other port that you have configured `caddy` to use).
 
 ```bash
 {
