@@ -225,8 +225,10 @@ http:// {
 		pass_all_env
 	}
 }
+```
 
 A custom `caddy` build can also be generated from the command line with:
+
 ```bash
 # 1. install the xcaddy build tool: 
 go install github.com/caddyserver/xcaddy/cmd/xcaddy@latest
