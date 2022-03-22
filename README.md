@@ -129,7 +129,7 @@ If everything went well then the omega search page should now be accessible at:
 - http://localhost:8000/cgi-bin/omega
 
 
-### Caddy server
+### Caddy server with fcgiwrap
 
 1. Intall `fcgiwrap`:
 
@@ -184,6 +184,53 @@ launchctl unload -w ~/Library/LaunchAgents/caddy_launcher.plist
 launchctl unload -w ~/Library/LaunchAgents/fcgiwrap_launcher.plist
 ```
 
-Follow the sa
+### Caddy server with native CGI plugin
+
+You can also run caddy with the the native 3rd party CGI plugin: 
+
+1. Go to https://caddyserver.com/download and enable the `http.handlers.cgi` plugin.
+2. Click the **Download** button.
+3. Use a `Caddyfile` like the one below:
+
+
+
 
 The search page should now be available at http://localhost/cgi-bin/omega (or on whatever other port that you have configured `caddy` to use`).
+
+```bash
+{
+	# debug
+	# http_port 8080
+	order cgi last
+	order file_server last
+
+	log {
+		output stderr
+		format console
+		level DEBUG
+	}
+}
+
+http:// {
+	root * /
+
+	file_server browse {
+		root /docs/my-files-are-here
+	}
+
+	## this is the 'omega' file copied from /usr/local/Cellar/omega/1.4.18/lib/xapian-omega/bin/omega
+	cgi /omega* /var/www/cgi-bin/omega {
+		script_name /omega
+		dir /var/www/cgi-bin
+		pass_all_env
+	}
+}
+
+A custom `caddy` build can also be generated from the command line with:
+```bash
+# 1. install the xcaddy build tool: 
+go install github.com/caddyserver/xcaddy/cmd/xcaddy@latest
+
+# 2. make the build with the custom plugin:
+xcaddy build --with github.com/aksdb/caddy-cgi/v2
+```
