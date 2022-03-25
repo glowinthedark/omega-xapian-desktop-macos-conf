@@ -171,17 +171,17 @@ http:// {
 caddy start --config /etc/caddy/Caddyfile
 ```
 
-To activate and start `caddy` and `fcgiwrap` using the included plist files [caddy_launcher.plist](caddy_launcher.plist) and [fcgiwrap_launcher.plist](fcgiwrap_launcher.plist):
+To activate and start `caddy` and `fcgiwrap` using the included plist files [caddy.plist](caddy_launcher.plist) and [fcgiwrap.plist](fcgiwrap_launcher.plist):
 
 ```bash
-launchctl load -w ~/Library/LaunchAgents/fcgiwrap_launcher.plist
-launchctl load -w ~/Library/LaunchAgents/caddy_launcher.plist
+launchctl load -w ~/Library/LaunchAgents/fcgiwrap.plist
+launchctl load -w ~/Library/LaunchAgents/caddy.plist
 ```
 
 Stop caddy via launchd:
 ```bash
-launchctl unload -w ~/Library/LaunchAgents/caddy_launcher.plist
-launchctl unload -w ~/Library/LaunchAgents/fcgiwrap_launcher.plist
+launchctl unload -w ~/Library/LaunchAgents/caddy.plist
+launchctl unload -w ~/Library/LaunchAgents/fcgiwrap.plist
 ```
 
 ### Caddy server with native CGI plugin
