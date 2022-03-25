@@ -35,7 +35,7 @@ Location of the CGI script for web search:
 /usr/local/Cellar/omega/1.4.18/lib/xapian-omega/bin/omega
 ```
 
-2. Download and extract the search templates from [xapian-omega-1.4.19.tar.xz](https://oligarchy.co.uk/xapian/1.4.19/xapian-omega-1.4.19.tar.xz) and copy the templates to `/var/lib/omega/templates`
+2. Download and extract the search templates from [xapian-omega-1.4.19.tar.xz](https://oligarchy.co.uk/xapian/1.4.19/xapian-omega-1.4.19.tar.xz) and copy the `templates` folder to `/var/lib/omega/templates`
 
 ```bash
 cd /tmp
