@@ -8,7 +8,7 @@
 	<string>caddy</string>
 	<key>ProgramArguments</key>
 	<array>
-		<string>/usr/local/opt/caddy/bin/caddy</string>
+		<string>/usr/local/bin/caddy</string>
 		<string>run</string>
 		<string>--config</string>
 		<string>/etc/caddy/Caddyfile</string>
