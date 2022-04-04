@@ -69,7 +69,7 @@ Relevant keys:
 
 ```bash
 # Directory containing Xapian databases:
-database_dir /var/lib/omega
+database_dir /var/lib/omega/data
 
 # Directory containing OmegaScript templates:
 template_dir /var/lib/omega/templates
