@@ -16,34 +16,34 @@ View the files installed by `brew`:
 ```bash
 brew list omega
 
-#/usr/local/Cellar/omega/1.4.18/bin/dbi2omega
-#/usr/local/Cellar/omega/1.4.18/bin/htdig2omega
-#/usr/local/Cellar/omega/1.4.18/bin/mbox2omega
-#/usr/local/Cellar/omega/1.4.18/bin/omindex
-#/usr/local/Cellar/omega/1.4.18/bin/omindex-list
-#/usr/local/Cellar/omega/1.4.18/bin/scriptindex
-#/usr/local/Cellar/omega/1.4.18/etc/omega.conf
-#/usr/local/Cellar/omega/1.4.18/lib/xapian-omega/ (5 files)
-#/usr/local/Cellar/omega/1.4.18/share/doc/ (9 files)
-#/usr/local/Cellar/omega/1.4.18/share/man/ (3 files)
-#/usr/local/Cellar/omega/1.4.18/share/omega/ (2 files)
+#/usr/local/Cellar/omega/1.4.21/bin/dbi2omega
+#/usr/local/Cellar/omega/1.4.21/bin/htdig2omega
+#/usr/local/Cellar/omega/1.4.21/bin/mbox2omega
+#/usr/local/Cellar/omega/1.4.21/bin/omindex
+#/usr/local/Cellar/omega/1.4.21/bin/omindex-list
+#/usr/local/Cellar/omega/1.4.21/bin/scriptindex
+#/usr/local/Cellar/omega/1.4.21/etc/omega.conf
+#/usr/local/Cellar/omega/1.4.21/lib/xapian-omega/ (5 files)
+#/usr/local/Cellar/omega/1.4.21/share/doc/ (9 files)
+#/usr/local/Cellar/omega/1.4.21/share/man/ (3 files)
+#/usr/local/Cellar/omega/1.4.21/share/omega/ (2 files)
 ```
 
 Location of the CGI script for web search:
 
 ```
-/usr/local/Cellar/omega/1.4.18/lib/xapian-omega/bin/omega
+/usr/local/Cellar/omega/1.4.21/lib/xapian-omega/bin/omega
 ```
 
-2. Download and extract the search templates from [xapian-omega-1.4.19.tar.xz](https://oligarchy.co.uk/xapian/1.4.19/xapian-omega-1.4.19.tar.xz) and copy the `templates` folder to `/var/lib/omega/templates`
+2. Download and extract the search templates from [xapian-omega-1.4.21.tar.xz](https://oligarchy.co.uk/xapian/1.4.21/xapian-omega-	1.4.21.tar.xz) (take the [latest version](https://oligarchy.co.uk/xapian/)) and copy the `templates` folder to `/var/lib/omega/templates`
 
 ```bash
 cd /tmp
-wget https://oligarchy.co.uk/xapian/1.4.19/xapian-omega-1.4.19.tar.xz 
-tar xvf xapian-omega-1.4.19.tar.xz
+wget https://oligarchy.co.uk/xapian/1.4.21/xapian-omega-1.4.21.tar.xz 
+tar xvf xapian-omega-1.4.21.tar.xz
 sudo mkdir -p /var/lib/omega
 sudo chown `whoami` /var/lib/omega
-cp -r xapian-omega-1.4.19/templates /var/lib/omega/
+cp -r xapian-omega-1.4.21/templates /var/lib/omega/
 
 ## after the copy operation your /var/lib/omega/templates should look similar to this:
 # $ tree /var/lib/omega/templates
@@ -62,7 +62,7 @@ cp -r xapian-omega-1.4.19/templates /var/lib/omega/
 3. Edit `omega.conf`
 
 ```bash
-vi /usr/local/Cellar/omega/1.4.18/etc/omega.conf
+vi /usr/local/Cellar/omega/1.4.21/etc/omega.conf
 ```
 
 Relevant keys:
