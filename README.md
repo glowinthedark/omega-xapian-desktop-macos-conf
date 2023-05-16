@@ -29,6 +29,8 @@ brew list omega
 #/usr/local/Cellar/omega/1.4.21/share/omega/ (2 files)
 ```
 
+> 💡  NOTE: On apple silicon macs homebrew uses `/opt/homebrew` instead of `/usr/local` — make sure you adjust all the paths accordingly.
+
 Location of the CGI script for web search:
 
 ```
