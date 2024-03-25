@@ -1,0 +1,319 @@
+$httpheader{Content-Type,text/html; charset=utf-8}<!DOCTYPE html><html lang="en">
+$set{flag_spelling,$ne{$cgi{SPELL},0}}
+$set{thousand,$.}$set{decimal,.}
+$setmap{prefix,,$split{ S B F},title,S,author,A,topic,B}
+${
+$def{PREV,
+$if{$ne{$topdoc,0},<input type=image name="&lt;" alt="&lt;"
+src="/icons/omega/prev.png" height=30 width=30>,
+<img alt="" src="/icons/omega/prevoff.png" height=30 width=30>}
+}
+
+$def{NEXT,
+$if{$ne{$last,$msize},<input type=image name="&gt;" alt="&gt;"
+src="/icons/omega/next.png" height=30 width=30>,
+<img alt="" src="/icons/omega/nextoff.png" height=30 width=30>}
+}
+
+$def{P,<input type=image name="$1" value="$1" src="/icons/omega/page-$2.png" $opt{a} alt="$1">}
+$def{PAGE,$if{$gt{$1,9},$if{$gt{$1,99},$P{$1,$div{$1,100}}}$P{$1,$mod{$div{$1,10},10}}}$P{$1,$mod{$1,10}}}
+
+$def{S,<img src="/icons/omega/page-$2s.png" $opt{a} alt=$1>}
+$def{SPAGE,$if{$gt{$1,9},$if{$gt{$1,99},$S{$1,$div{$1,100}}}$S{$1,$mod{$div{$1,10},10}}}$S{$1,$mod{$1,10}}}
+}
+
+$def{PREV,$if{$ne{$topdoc,0},<input type=submit name="&lt;" value="Previous">}}
+
+$def{PAGE,<input type=submit name="[" value="$1">}
+
+$def{SPAGE,<input type=submit name="[" value="$1" disabled=disabled>}
+
+$def{NEXT,$if{$ne{$last,$msize},<input type=submit name="&gt;" value="Next">}}
+
+<head>
+<title>$if{$query,Omega Search: $html{$query},Omega Search}</title>
+$if{$opt{topterms},$include{inc/toptermsjs}}
+<style>
+input[type=image] {
+  border: 0px;
+  }
+
+  body {
+    margin-top: 3em;
+    padding: 1em;
+  }
+
+  * {
+    font-family: 'PT Serif', Marion, Charter, '.New York', Palatino, Georgia, Helvetica;
+    line-height: 1.6;
+  }
+
+
+  /*
+  input[type=submit] {
+    border: 1px dotted lightgray;
+    margin: 1em;
+    padding: 0.4em;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+  }
+  */
+
+  .btn {
+    margin-top: .3em;
+    border: 0;
+    margin: 0 1em;
+    padding: 0.1em 0.4em;
+    background-image: -webkit-linear-gradient(top, #e2e1e1, #cfcfcf);
+    background-image: -moz-linear-gradient(top, #e2e1e1, #cfcfcf);
+    background-image: -ms-linear-gradient(top, #e2e1e1, #cfcfcf);
+    background-image: -o-linear-gradient(top, #e2e1e1, #cfcfcf);
+    background-image: linear-gradient(to bottom, #e2e1e1, #cfcfcf);
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: 2px 2px 3px #cecece;
+    -moz-box-shadow: 2px 2px 3px #cecece;
+    box-shadow: 2px 2px 3px #cecece;
+    font-family: Arial;
+    color: #3f3f3f;
+    font-size: 20px;
+    background: #e2e1e1;
+    text-decoration: none;
+  }
+
+  .btn:hover {
+    background: #f3f3f3;
+    background-image: -webkit-linear-gradient(top, #f3f3f3, #e2e1e1);
+    background-image: -moz-linear-gradient(top, #f3f3f3, #e2e1e1);
+    background-image: -ms-linear-gradient(top, #f3f3f3, #e2e1e1);
+    background-image: -o-linear-gradient(top, #f3f3f3, #e2e1e1);
+    background-image: linear-gradient(to bottom, #f3f3f3, #e2e1e1);
+    text-decoration: none;
+  }
+
+  input[type=text] {
+    -webkit-box-shadow: rgba(29, 36, 23, 0.386719) -2px 3px 4px 0px;
+    -moz-box-shadow: rgba(29, 36, 23, 0.386719) -2px 3px 4px 0px;
+    box-shadow: rgba(29, 36, 23, 0.386719) -2px 3px 4px 0px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    border: 0;
+    margin: 0 1em;
+    padding: 0.1em 0.4em;
+    font-size: 20px;
+  }
+
+  input[type=text] {
+    background-color: rgb(250, 250, 250);
+  }
+
+  a,
+  a:link,
+  a:visited {
+    cursor: pointer;
+    color: #1984e1;
+    text-decoration: none !important;
+    -webkit-transition: color 1s ease, background-color 1s ease;
+    -moz-transition: color 1s ease, background-color 1s ease;
+    -o-transition: color 1s ease, background-color 1s ease;
+    transition: color 1s ease, background-color 1s ease;
+  }
+
+  a:hover {
+    color: #1861af;
+    background-color: #effaff;
+  }
+
+</style>
+<script type="text/javascript"><!--
+function f2(n) {return (n>9?"":"0")+n;}
+function write_date(time_t) {
+var d=new Date();d.setTime(time_t*1000);
+var D=d.getFullYear()+"-"+f2(d.getMonth()+1)+"-"+f2(d.getDate());
+var T=f2(d.getHours())+":"+f2(d.getMinutes())+":"+f2(d.getSeconds());
+document.write("<span title=\""+D+" "+T+"\">Modified:<br><b>"+D+"</b></span>");
+}
+// -->
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+</head>
+<body bgcolor="#ffffff">
+
+<form name=P method=get
+action="$html{$or{$env{SCRIPT_NAME},omega}}" target="_top">
+<center>
+<input id="omega-autofocus" type=search name=P value="$html{$query}" size=65 autofocus>
+<script>
+if (!("autofocus" in document.createElement("input")))
+ document.getElementById("omega-autofocus").focus();
+</script>
+$if{$dbname,<select name=DB><option value=default>default</option><option value=gitnot>gitnot</option></select>}
+<input class="btn" type=submit value="Search"><br/>
+
+$if{,$include{inc/anyalldropbox},$include{inc/anyallradio}}
+$if{$opt{topterms},$if{$or{$query,$ne{$msize,0}},
+ <div title="Suggested terms to add to your query"
+ style="text-align:left;background:#cfc;border:1px solid green;padding:2px;font:11px verdana$. arial$. helvetica$. sans-serif;">
+ $map{$topterms,<span style="white-space:nowrap"><input type=checkbox name=X value="$html{$prettyterm{$_}}" onClick="C(this)">$html{$prettyterm{$_}}</span> }
+ <br><noscript><input type=hidden name=ADD value=1></noscript>
+ </div>
+}}
+<br>
+$if{$suggestion,Did you mean: <a href="$html{$or{$env{SCRIPT_NAME},omega}?DB=$url{$dbname}&P=$url{$suggestion}$if{$ne{$hitsperpage,10},&HITSPERPAGE=$hitsperpage}$if{$fmt,&FMT=$url{$fmt}}$if{$cgi{COLLAPSE},&COLLAPSE=$url{$cgi{COLLAPSE}}}$map{$relevants,&R=$_}$if{$cgi{THRESHOLD},&THRESHOLD=$url{$cgi{THRESHOLD}}}$map{$cgilist{B},&B=$url{$_}}&SPELL=0}">$html{$suggestion}</a><br>}
+$or{$html{$error},
+$if{$eq{$msize,0},
+$if{$query,No documents match your query,
+Searching $nice{$dbsize} documents
+},
+$if{$not{$msizeexact},
+ $nice{$add{$topdoc,1}}-$nice{$last} of about $nice{$msize} matches,
+ $if{$and{$eq{$last,$msize},$eq{$topdoc,0}},
+  All $nice{$msize} matches,
+  $nice{$add{$topdoc,1}}$if{$ne{$add{$topdoc,1},$last},-$nice{$last}} of exactly $nice{$msize} matches}
+}
+
+</center>
+$if{$map{$queryterms,$set{U,$unstem{$_}}$set{F_$opt{U},$add{$opt{F_$opt{U}},$freq{$_}}}},$list{$unique{$map{$queryterms,$set{U,$unstem{$_}}$list{$html{$unique{$opt{U}}},<b>,</b>/<b>,</b>}:&nbsp;$nice{$opt{F_$opt{U}}}}},Term frequencies: ,$. ,}}
+<br><small>Search took $time seconds</small>
+<table>
+$hitlist{<tr><td valign=top>
+${<img src="/icons/omega/score-$div{$percentage,10}.png" alt="$percentage%" height=16 width=32>}
+<div title="$percentage%" style='float:left;width:60px;height:10px;border:1px solid black;margin-top:4px;'>
+<div style='width:$div{$mul{$percentage,6},10}px; height:10px; background-color: red;'>
+</div></div>
+<div style='float:left;margin-top:2px;font-size:x-small;'>
+$if{$and{$field{modtime},$ne{$field{modtime},-1}},
+<script type="text/javascript">write_date($add{$field{modtime}});</script>
+<noscript>
+<span title="$html{$date{$field{modtime},%Y-%m-%d %H:%M:%S}}">
+Modified:<br><b>$html{$date{$field{modtime},%Y-%m-%d}}</b></span>
+</noscript><br>
+}
+$if{$field{language},Language: <b>$html{$field{language}}</b><br>}
+$if{$field{size},<span title="$html{$field{size}} bytes">Size: <b>$html{$filesize{$field{size}}}</b></span><br>}
+<div title="Mark this document as relevant" style="float:left;background-color:#cfc;border:1px solid green;margin-top:2px;">
+<input type=checkbox name=R value=$id$if{$relevant, checked}>
+</div>
+</div>
+</td>
+<td><b><a href="$html{$field{url}}">$html{$or{$field{caption},$field{title},$prettyurl{$field{url}},Untitled}}</a></b><br>
+<small>$snippet{$field{sample}}</small><br>
+<a href="$html{$field{url}}">$html{$prettyurl{$field{url}}}</a><br>
+<small>
+matching:
+<i>$list{$map{$terms,$html{$prettyterm{$_}}},</i>$. <i>,</i> and <i>}</i></small>${for lynx:}<p></td></tr>}
+</table>
+
+<br><center>
+
+${suppress next, prev, and page links if there's only one page}
+$if{$ne{$lastpage,1},
+$set{a,$if{$opt{pagelink_height}, HEIGHT=$opt{pagelink_height}}$if{$opt{pagelink_width}, WIDTH=$opt{pagelink_width}}}
+
+${1-W ... X-(this)-Y ...}
+$set{w,$min{3,$add{$thispage,-1}}}
+$set{x,$max{$add{$opt{w},1},$add{$thispage,-3}}}
+$set{y,$min{$lastpage,$add{$thispage,8}}}
+$PREV
+$map{$range{1,$opt{w}},$PAGE{$_}}
+$if{$ne{$add{$opt{w},1},$opt{x}},...}
+$map{$range{$opt{x},$add{$thispage,-1}},$PAGE{$_}}
+$SPAGE{$thispage}
+$map{$range{$add{$thispage,1},$opt{y}},$PAGE{$_}}
+$if{$ne{$opt{y},$lastpage},...}
+$NEXT
+}
+}}
+</center><br>
+
+$if{$ne{$topdoc,0},<input type=hidden name=TOPDOC value=$topdoc>}
+$if{$ne{$hitsperpage,10},<input type=hidden name=HITSPERPAGE value=$hitsperpage>}
+$if{$fmt,<input type=hidden name=FMT value="$html{$fmt}">}
+$if{$cgi{COLLAPSE},<input type=hidden name=COLLAPSE value="$html{$cgi{COLLAPSE}}">}
+$if{$queryterms,<input type=hidden name=xP value="$html{$queryterms}">}
+<input type=hidden name=xDB value="$html{$dbname}">
+<input type=hidden name=xFILTERS value="$html{$filters}">
+$list{$relevants,<input type=hidden name=R value=",.,">}
+$if{$cgi{THRESHOLD},<input type=hidden name=THRESHOLD value="$html{$cgi{THRESHOLD}}">}
+${Preserve any B filters used - this needs modifying if you modify this template
+  to have B on radio buttons, SELECT, etc}
+$map{$cgilist{B},<input type=hidden name=B value="$html{$_}">}
+</form>
+<div align=right><i><small><a href="https://xapian.org/"> ɷ </a></small></i></div>
+
+<script>
+  $$("a").each(function() {
+  $$(this).click(function(event) {
+    // Get the href attribute of the clicked link
+    var href = $$(this).attr("href");
+
+    // Check if the link ends with .md extension
+    if (href.endsWith(".md")) {
+      // Prevent the default click action
+      event.preventDefault();
+
+      // Create a popup DIV element with 600x800px size and some style
+      var popup = $$("<div></div>").attr('id', 'popup').css({
+        width: "80vw",
+        height: "90vh",
+        position: "fixed",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+        backgroundColor: "white",
+        border: "1px solid black",
+        overflowY: "scroll",
+        padding: "10px"
+      });
+
+
+      // Load the markdown content from the link into the popup element
+      // Use marked.parse as a callback function to parse the markdown as HTML
+      popup.load(href, function(response) {
+        if (window.marked){
+            popup.html(marked.parse(response));
+        }
+      });
+
+      // Append the popup element to the body
+      $$("body").append(popup);
+
+      // Add an event listener to the document to close the popup
+      $$(document).click(function closePopup(e) {
+        // Check if the click target is not inside the popup element
+        var $$el = $$(e.target);
+        if (e.target.tagName == 'A' || $$el.id == 'popup' || $$el.closest('#popup').length) {
+          return;
+        }
+          // Remove the popup element from the body
+          popup.remove();
+
+          // Remove this event listener
+          $$(document).off("click", closePopup);
+        
+      });
+
+      // Add an event listener to the document to close the popup on Escape key press
+      $$(document).keydown(function closePopupOnEscape(e) {
+        // Check if the key code is 27 (Escape key)
+        if (e.keyCode === 27) {
+          // Remove the popup element from the body
+          popup.remove();
+
+          // Remove this event listener
+          $$(document).off("keydown", closePopupOnEscape);
+        }
+      });
+    }
+  });
+});
+
+</script>
+</body>
+</html>
+$if{$log{query.log}}
